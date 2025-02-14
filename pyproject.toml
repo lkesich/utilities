@@ -1,0 +1,22 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "utils"
+version = "0.0.1"
+authors = [
+  { name="Lydia-Rose Kesich", email="lkesich@mainevotes.net" },
+]
+
+description = "Small utility functions"
+readme = "README.md"
+requires-python = ">=3.8"
+
+classifiers = [
+    "Programming Language :: Python :: 3"
+]
+
+[project.urls]
+Homepage = "https://github.com/lkesich/utilities"
+Issues = "https://github.com/lkesich/utilities/issues"
