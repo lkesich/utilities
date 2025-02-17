@@ -3,8 +3,8 @@ import re
 
 def replace_all(replacements: dict, text: str):
     """
-    Performs multiple replacements in a text string using a dictionary of old->new values
-    Dictionary items can be text or regular expressions
+    Perform multiple replacements in a text string using a dictionary of old -> new values.
+    Dictionary items can be text or regular expressions.
     """
     if len(replacements) > 0:
         for (old_pattern, new_pattern) in replacements.items():
@@ -13,9 +13,9 @@ def replace_all(replacements: dict, text: str):
 
 def squish(input_string: str):
     """
-    Python equivalent of stringr::str_squish() in R
-    Replaces all whitespace with a single space character
-    Strips leading and trailing whitespace
+    Python equivalent of stringr::str_squish() in R.
+    Replace all whitespace with a single space character.
+    Strip leading and trailing whitespace.
     """
     return re.sub(r'\s+', ' ', input_string.strip())
 
@@ -34,17 +34,17 @@ def standardize_whitespace(input_string: str):
     return replace_all(replacements, squish(input_string))
 
 standardize_whitespace.__doc__ = f"""
-    Replaces all whitespace with a single space character
-    Strips leading whitespace from these characters: {' '.join(_REMOVE_LEADING_SPACE)}
-    Strips trailing whitespace from these characters: {' '.join(_REMOVE_TRAILING_SPACE)}
-    Adds leading whitespace from these characters: {' '.join(_ADD_LEADING_SPACE)}
-    Adds trailing whitespace from these characters: {' '.join(_ADD_TRAILING_SPACE)}
+    Replace all whitespace with a single space character.
+    Strip leading whitespace from these characters: {' '.join(_REMOVE_LEADING_SPACE)}
+    Strip trailing whitespace from these characters: {' '.join(_REMOVE_TRAILING_SPACE)}
+    Add leading whitespace from these characters: {' '.join(_ADD_LEADING_SPACE)}
+    Add trailing whitespace from these characters: {' '.join(_ADD_TRAILING_SPACE)}
     """
 
 def create_surrogate_key(fields: List, delimiter='_'):
     """
-    Convert all elements to strings and concatenates them with delimiter
-    Remove all characters that are non-alphanumeric, including whitespace
+    Convert all elements to strings and concatenate them with delimiter.
+    Remove all characters that are non-alphanumeric, including whitespace.
     """
     elements = list(filter(None, fields))
     elements = map(lambda e: re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
@@ -74,8 +74,8 @@ def proper_case(input_string: str) -> str:
 
 def match_case(input_string: str, match_string: str) -> str:
     """
-    Aligns the case of string with the case of comparison string
-    Does not modify input string if both strings are mixed case
+    Align the case of string with the case of comparison string.
+    Does not modify input string if both strings are mixed case.
     """
     if {type(input_string), type(match_string)} != {str}:
         raise TypeError('Both inputs must be strings')
