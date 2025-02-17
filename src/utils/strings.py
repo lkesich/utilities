@@ -19,26 +19,26 @@ def squish(input_string: str):
     """
     return re.sub(r'\s+', ' ', input_string.strip())
 
-__REMOVE_LEADING_SPACE = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
-__REMOVE_TRAILING_SPACE = ['(', '/', '-']
-__ADD_LEADING_SPACE = ['&', '(']
-__ADD_TRAILING_SPACE = ['&', ')', ',', '.', ':', ';', '!', '?']
+_REMOVE_LEADING_SPACE = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
+_REMOVE_TRAILING_SPACE = ['(', '/', '-']
+_ADD_LEADING_SPACE = ['&', '(']
+_ADD_TRAILING_SPACE = ['&', ')', ',', '.', ':', ';', '!', '?']
 
 def standardize_whitespace(input_string: str):    
     replacements = {
-        f"\s([{''.join(__REMOVE_LEADING_SPACE)}])": "\g<1>"
-        , f"([{''.join(__REMOVE_TRAILING_SPACE)}])\s": "\g<1>"
-        , f"(?<=[^\s])([{''.join(__ADD_LEADING_SPACE)}])": " \g<1>"
-        , f"([{''.join(__ADD_TRAILING_SPACE)}])(?=[^\s])": "\g<1> "
+        f"\s([{''.join(_REMOVE_LEADING_SPACE)}])": "\g<1>"
+        , f"([{''.join(_REMOVE_TRAILING_SPACE)}])\s": "\g<1>"
+        , f"(?<=[^\s])([{''.join(_ADD_LEADING_SPACE)}])": " \g<1>"
+        , f"([{''.join(_ADD_TRAILING_SPACE)}])(?=[^\s])": "\g<1> "
     }
     return replace_all(replacements, squish(input_string))
 
 standardize_whitespace.__doc__ = f"""
     Replaces all whitespace with a single space character
-    Strips leading whitespace from these characters: {__REMOVE_LEADING_SPACE}
-    Strips trailing whitespace from these characters: {__REMOVE_TRAILING_SPACE}
-    Adds leading whitespace from these characters: {__ADD_LEADING_SPACE}
-    Adds trailing whitespace from these characters: {__ADD_TRAILING_SPACE}
+    Strips leading whitespace from these characters: {' '.join(_REMOVE_LEADING_SPACE)}
+    Strips trailing whitespace from these characters: {' '.join(_REMOVE_TRAILING_SPACE)}
+    Adds leading whitespace from these characters: {' '.join(_ADD_LEADING_SPACE)}
+    Adds trailing whitespace from these characters: {' '.join(_ADD_TRAILING_SPACE)}
     """
 
 def create_surrogate_key(fields: List, delimiter='_'):
