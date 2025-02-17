@@ -11,7 +11,7 @@ def replace_all(replacements: dict, text: str):
             text = re.sub(old_pattern, new_pattern, text)
     return text
 
-def string_squish(input_string: str):
+def squish(input_string: str):
     """
     Python equivalent of stringr::str_squish() in R
     Replaces all whitespace with a single space character
@@ -38,7 +38,7 @@ def standardize_whitespace(input_string: str):
         , f"(?<=[^\s])([{''.join(_ADD_LEADING_SPACE)}])": " \g<1>"
         , f"([{''.join(_ADD_TRAILING_SPACE)}])(?=[^\s])": "\g<1> "
     }
-    return replace_all(replacements, string_squish(input_string))
+    return replace_all(replacements, squish(input_string))
 
 def create_surrogate_key(fields: List, delimiter='_'):
     """

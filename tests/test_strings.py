@@ -2,8 +2,8 @@ import unittest
 from src.utils import strings
 
 class TestStringSquish(unittest.TestCase):
-    def test_string_squish(self):
-        result = strings.string_squish(' a b  c ')
+    def test_squish(self):
+        result = strings.squish(' a b  c ')
         self.assertEqual(result, 'a b c')
 
 class TestStandardizeWhitespace(unittest.TestCase):
