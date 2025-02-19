@@ -6,25 +6,25 @@ class TestStringSquish(unittest.TestCase):
         result = strings.squish(' a b  c ')
         self.assertEqual(result, 'a b c')
 
-class TestStandardizeWhitespace(unittest.TestCase):
+class TestNormalizeWhitespace(unittest.TestCase):
     def test_remove_trailing_whitespace(self):
-        result = strings.standardize_whitespace('( ab)')
+        result = strings.normalize_whitespace('( ab)')
         self.assertEqual(result, '(ab)')
 
     def test_add_trailing_whitespace(self):
-        result = strings.standardize_whitespace('a,b')
+        result = strings.normalize_whitespace('a,b')
         self.assertEqual(result, 'a, b')
 
     def test_remove_leading_whitespace(self):
-        result = strings.standardize_whitespace(' a /b ')
+        result = strings.normalize_whitespace(' a /b ')
         self.assertEqual(result, 'a/b')
 
     def test_add_leading_whitespace(self):
-        result = strings.standardize_whitespace('a& b')
+        result = strings.normalize_whitespace('a& b')
         self.assertEqual(result, 'a & b')
 
     def test_multiple_conditions(self):
-        result = strings.standardize_whitespace(' a ,b c( 1 ) d&e -- f g /h .')
+        result = strings.normalize_whitespace(' a ,b c( 1 ) d&e -- f g /h .')
         self.assertEqual(result, 'a, b c (1) d & e--f g/h.')
 
 class TestReplaceAll(unittest.TestCase):

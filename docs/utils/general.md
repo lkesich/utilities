@@ -1,17 +1,13 @@
-"""
+Module utils.general
+====================
 General utility operations for creating cleaner, more readable code.
-"""
 
-from typing import List, Callable
-from functools import reduce
+Functions
+---------
 
-__all__ = [
-    'chain_operations'
-]
-
-def chain_operations(arg, order_of_operations: List[Callable]):
-    """Apply multiple functions to an argument in sequence.
-
+`chain_operations(arg, order_of_operations: List[Callable])`
+:   Apply multiple functions to an argument in sequence.
+    
     This function is an implementation of functools.reduce. It allows functions
     from different classes to be applied to a variable in a specified order,
     without naming the variable each time.
@@ -26,5 +22,3 @@ def chain_operations(arg, order_of_operations: List[Callable]):
     Examples:
         >>> chain_operations(' abc ', [str.upper, str.strip])
         'ABC'
-    """
-    return reduce(lambda x, f: f(x), order_of_operations, arg)
