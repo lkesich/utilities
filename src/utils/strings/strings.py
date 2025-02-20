@@ -10,8 +10,8 @@ __all__ = [
     'match_case'
 ]
 
-from typing import List as List
-import re as re
+from typing import List
+import re
 
 def replace_all(replacements: dict, text: str) -> str:
     """Perform multiple replacements in a text string.
