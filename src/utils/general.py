@@ -1,14 +1,14 @@
 """
 General utility operations for creating cleaner, more readable code.
 """
-
 __docformat__ = 'google'
-__all__ = [
-    'chain_operations'
-]
 
 from typing import List, Callable
 from functools import reduce
+
+__all__ = [
+    'chain_operations'
+]
 
 def chain_operations(arg, order_of_operations: List[Callable]):
     """Apply multiple functions to an argument in sequence.
