@@ -6,10 +6,6 @@ __docformat__ = 'google'
 from typing import List, Callable
 from functools import reduce
 
-__all__ = [
-    'chain_operations'
-]
-
 def chain_operations(arg, order_of_operations: List[Callable]):
     """Apply multiple functions to an argument in sequence.
 
