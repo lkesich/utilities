@@ -1,5 +1,5 @@
 """
-String manipulation utilities for text processing.
+String manipulation utility functions for text processing.
 
 This module provides functions for standardizing text formatting,
 manipulating case, creating identifiers, and performing text replacements.
@@ -153,7 +153,7 @@ def proper_case(text: str) -> str:
       3. Capitalize the first word in the string, even if it is commonly lowercase
 
     Args:
-        text: String to apply proper case
+        text: String to proper case
         
     Returns:
         Proper cased string
