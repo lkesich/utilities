@@ -1,5 +1,5 @@
 """
-.. include:: /Users/lydia-rosekesich/repositories/utilities/README.md
+.. include:: ../../README.md
 
 See individual module documentation for detailed information.
 """
