@@ -1,5 +1,5 @@
 import unittest
-from utils import strings
+from utils.strings import strings
 
 class TestStringSquish(unittest.TestCase):
     def test_squish(self):
