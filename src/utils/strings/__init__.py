@@ -1,2 +1,2 @@
 from .strings import *
-from .strings import __all__
+__all__ =  strings.__all__
