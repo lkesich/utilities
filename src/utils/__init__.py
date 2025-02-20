@@ -1,7 +1,2 @@
-from .general import *
-from .strings import *
-
-__all__ = [
-    'general',
-    'strings'
-]
+from . import general
+from . import strings
