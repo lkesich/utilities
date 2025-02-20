@@ -1,5 +1,5 @@
 import unittest
-from src.utils import general
+from utils import general
 
 class TestChainOperations(unittest.TestCase):
     def test_chain_operations(self):

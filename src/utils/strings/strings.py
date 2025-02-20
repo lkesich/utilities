@@ -6,8 +6,8 @@ manipulating case, creating identifiers, and performing text replacements.
 """
 __docformat__ = 'google'
 
-from typing import List
-import re
+from typing import List as List
+import re as _re
 
 __all__ = [
     'replace_all',
@@ -37,7 +37,7 @@ def replace_all(replacements: dict, text: str) -> str:
     """
     if len(replacements) > 0:
         for (old_pattern, new_pattern) in replacements.items():
-            text = re.sub(old_pattern, new_pattern, text)
+            text = _re.sub(old_pattern, new_pattern, text)
     return text
 
 def squish(text: str) -> str:
@@ -56,16 +56,16 @@ def squish(text: str) -> str:
         >>> squish("  hello   world  ")
         'hello world'
     """
-    return re.sub(r'\s+', ' ', text.strip())
+    return _re.sub(r'\s+', ' ', text.strip())
 
 def normalize_whitespace(text: str) -> str:
     """Normalize whitespace and punctuation spacing in text.
     
     This function performs several whitespace normalization operations:
       1. Trims whitespace from start and end of string
-      2. Replaces all internal whitespace characters with a single space
-      3. Removes unnecessary whitespace around punctuation
-      4. Adds whitespace around punctuation when necessary
+      2. Applies `squish` to replace all internal whitespace with a single space
+      3. Removes unnecessary whitespace around punctuation using `replace_all`
+      4. Adds whitespace around punctuation when necessary using `replace_all`
     
     Args:
         text: String to standardize
@@ -114,7 +114,7 @@ def create_surrogate_key(fields: List, delimiter='_') -> str:
         '12~ab~cd'
     """
     elements = list(filter(None, fields))
-    elements = map(lambda e: re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
+    elements = map(lambda e: _re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
     id_string = f'{delimiter}'.join(list(elements))
     return id_string
 
@@ -170,7 +170,7 @@ def proper_case(text: str) -> str:
     title = text.title()
     
     for word in _ALWAYS_LOWERCASE:
-        title = re.sub(f'(?i)(?<=\s){word}\\b', word, title)
+        title = _re.sub(f'(?i)(?<=\s){word}\\b', word, title)
     return title
 
 def match_case(text: str, match_reference: str) -> str:

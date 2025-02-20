@@ -6,7 +6,7 @@ build-backend = "hatchling.build"
 name = "utils"
 version = "0.0.1"
 authors = [
-  { name="Lydia-Rose Kesich", email="lkesich@mainevotes.net" },
+  { name="Lydia-Rose Kesich", email="lkesich@mainevotes.net" }
 ]
 
 description = "Small utility functions"
@@ -15,10 +15,25 @@ license = {file = "LICENSE"}
 requires-python = ">=3.8"
 
 classifiers = [
-    "Programming Language :: Python :: 3"
+  "Programming Language :: Python :: 3",
+  "Typing :: Typed"
 ]
 
 [project.urls]
 Homepage = "https://github.com/lkesich/utilities"
 Documentation = "https://lkesich.github.io/utilities/"
 Issues = "https://github.com/lkesich/utilities/issues"
+
+[tool.mypy]
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+disallow_untyped_defs = false
+
+[tool.tox.env.typecheck]
+deps = ["mypy>=1.0.0"]
+commands = ["mypy src/utils"]
