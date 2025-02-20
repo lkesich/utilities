@@ -19,4 +19,5 @@ classifiers = [
 
 [project.urls]
 Homepage = "https://github.com/lkesich/utilities"
+Documentation = "https://lkesich.github.io/utilities/"
 Issues = "https://github.com/lkesich/utilities/issues"
