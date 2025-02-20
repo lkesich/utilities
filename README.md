@@ -1,6 +1,6 @@
-# Utilities
+# Utils
 
-Utilities is Python library for miscellaneous custom functions.
+utils is Python library for miscellaneous custom functions.
 
 ## Table of Contents
 
