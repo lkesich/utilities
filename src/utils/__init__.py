@@ -1,5 +1,5 @@
-from .general.general import *
-from .strings.strings import *
+from .general import *
+from .strings import *
 
 __all__ = [
     'general',

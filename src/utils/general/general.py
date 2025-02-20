@@ -3,6 +3,10 @@ General utility operations for creating cleaner, more readable code.
 """
 __docformat__ = 'google'
 
+__all__ = [
+    'chain_operations'
+]
+
 from typing import List, Callable
 from functools import reduce
 

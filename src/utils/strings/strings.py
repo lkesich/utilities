@@ -6,8 +6,18 @@ manipulating case, creating identifiers, and performing text replacements.
 """
 __docformat__ = 'google'
 
+__all__ = [
+    'replace_all',
+    'squish',
+    'normalize_whitespace',
+    'create_surrogate_key',
+    'check_case',
+    'proper_case',
+    'match_case'
+]
+
 from typing import List as List
-import re as _re
+import re as re
 
 def replace_all(replacements: dict, text: str) -> str:
     """Perform multiple replacements in a text string.
@@ -27,7 +37,7 @@ def replace_all(replacements: dict, text: str) -> str:
     """
     if len(replacements) > 0:
         for (old_pattern, new_pattern) in replacements.items():
-            text = _re.sub(old_pattern, new_pattern, text)
+            text = re.sub(old_pattern, new_pattern, text)
     return text
 
 def squish(text: str) -> str:
@@ -46,7 +56,7 @@ def squish(text: str) -> str:
         >>> squish("  hello   world  ")
         'hello world'
     """
-    return _re.sub(r'\s+', ' ', text.strip())
+    return re.sub(r'\s+', ' ', text.strip())
 
 def normalize_whitespace(text: str) -> str:
     """Normalize whitespace and punctuation spacing in text.
@@ -71,17 +81,17 @@ def normalize_whitespace(text: str) -> str:
         'a, b c (1)'
     """
     # Characters that should not have leading whitespace
-    _REMOVE_LEADING_SPACE = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
+    reMOVE_LEADING_SPACE = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
     # Characters that should not have trailing whitespace
-    _REMOVE_TRAILING_SPACE = ['(', '/', '-']
+    reMOVE_TRAILING_SPACE = ['(', '/', '-']
     # Characters that should have leading whitespace
     _ADD_LEADING_SPACE = ['&', '(']
     # Characters that should have trailing whitespace
     _ADD_TRAILING_SPACE = ['&', ')', ',', '.', ':', ';', '!', '?']
 
     replacements = {
-        f"\s([{''.join(_REMOVE_LEADING_SPACE)}])": "\g<1>"
-        , f"([{''.join(_REMOVE_TRAILING_SPACE)}])\s": "\g<1>"
+        f"\s([{''.join(reMOVE_LEADING_SPACE)}])": "\g<1>"
+        , f"([{''.join(reMOVE_TRAILING_SPACE)}])\s": "\g<1>"
         , f"(?<=[^\s])([{''.join(_ADD_LEADING_SPACE)}])": " \g<1>"
         , f"([{''.join(_ADD_TRAILING_SPACE)}])(?=[^\s])": "\g<1> "
     }
@@ -92,7 +102,7 @@ def create_surrogate_key(fields: List, delimiter='_') -> str:
 
     Args:
         fields: List of elements to include
-        delimiter: String delimiter. Defaults to _
+        delimiter: String delimiter. Defaults to `_`
     
     Returns:
         Surrogate primary key
@@ -104,7 +114,7 @@ def create_surrogate_key(fields: List, delimiter='_') -> str:
         '12~ab~cd'
     """
     elements = list(filter(None, fields))
-    elements = map(lambda e: _re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
+    elements = map(lambda e: re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
     id_string = f'{delimiter}'.join(list(elements))
     return id_string
 
@@ -160,15 +170,15 @@ def proper_case(text: str) -> str:
     title = text.title()
     
     for word in _ALWAYS_LOWERCASE:
-        title = _re.sub(f'(?i)(?<=\s){word}\\b', word, title)
+        title = re.sub(f'(?i)(?<=\s){word}\\b', word, title)
     return title
 
-def match_case(text: str, match_reference: str) -> str:
+def match_case(text: str, matchreference: str) -> str:
     """Align the case of string with the case of comparison string.
     
     Args:
         text: String to normalize case
-        match_reference: String to reference for case
+        matchreference: String to reference for case
         
     Returns:
         String with matched case applied
@@ -180,13 +190,13 @@ def match_case(text: str, match_reference: str) -> str:
         >>> match_case('AbCd', 'a')
         'abcd'
     """
-    if {type(text), type(match_reference)} != {str}:
+    if {type(text), type(matchreference)} != {str}:
         raise TypeError('Both inputs must be strings')
-    elif check_case(text) == check_case(match_reference):
+    elif check_case(text) == check_case(matchreference):
         return text
-    elif match_reference.isupper():
+    elif matchreference.isupper():
         return text.upper()
-    elif match_reference.islower():
+    elif matchreference.islower():
         return text.lower()
     else:
         return proper_case(text)
