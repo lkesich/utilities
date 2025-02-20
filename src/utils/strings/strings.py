@@ -167,12 +167,12 @@ def proper_case(text: str) -> str:
         title = re.sub(f'(?i)(?<=\s){word}\\b', word, title)
     return title
 
-def match_case(text: str, matchreference: str) -> str:
+def match_case(text: str, match_reference: str) -> str:
     """Align the case of string with the case of comparison string.
     
     Args:
         text: String to normalize case
-        matchreference: String to reference for case
+        match_reference: String to reference for case
         
     Returns:
         String with matched case applied
@@ -184,13 +184,13 @@ def match_case(text: str, matchreference: str) -> str:
         >>> match_case('AbCd', 'a')
         'abcd'
     """
-    if {type(text), type(matchreference)} != {str}:
+    if {type(text), type(match_reference)} != {str}:
         raise TypeError('Both inputs must be strings')
-    elif check_case(text) == check_case(matchreference):
+    elif check_case(text) == check_case(match_reference):
         return text
-    elif matchreference.isupper():
+    elif match_reference.isupper():
         return text.upper()
-    elif matchreference.islower():
+    elif match_reference.islower():
         return text.lower()
     else:
         return proper_case(text)

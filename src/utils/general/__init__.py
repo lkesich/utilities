@@ -2,8 +2,7 @@
 General utility operations for creating cleaner, more readable code.
 """
 
+from .general import __all__
 from .general import *
 
-__all__ = [
-    'chain_operations'
-]
+__all__ = __all__
