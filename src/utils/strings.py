@@ -5,9 +5,7 @@ This module provides functions for standardizing text formatting,
 manipulating case, creating identifiers, and performing text replacements.
 """
 
-from typing import List
-import re
-
+__docformat__ = 'google'
 __all__ = [
     'replace_all',
     'squish',
@@ -17,6 +15,9 @@ __all__ = [
     'proper_case',
     'match_case'
 ]
+
+from typing import List
+import re
 
 def replace_all(replacements: dict, text: str) -> str:
     """Perform multiple replacements in a text string.
