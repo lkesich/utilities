@@ -11,7 +11,7 @@ Utilities is Python library for miscellaneous custom functions.
 ## License and Usage
 
 Usage of this library is governed by
-a [modified Apache License with author attribution statement](https://github.com/move-coop/parsons/blob/main/LICENSE.md).
+an [MIT license](https://github.com/lkesich/utilities/blob/main/LICENSE).
 
 ## Documentation
 
