@@ -1,4 +1,5 @@
 import unittest
+import re
 from utils.strings import strings
 
 class TestStringSquish(unittest.TestCase):
@@ -51,6 +52,19 @@ class TestCheckCase(unittest.TestCase):
 
     def test_check_case_error(self):
         self.assertRaises(TypeError, strings.check_case, 1)
+
+class TestFind(unittest.TestCase):
+    def test_find_string(self):
+        result = strings.find('a 1 b 2', '\d+')
+        self.assertEqual(result, '1')
+
+    def test_find_pattern(self):
+        result = strings.find('a:1 b:2', re.compile('[^a-z]'))
+        self.assertEqual(result, ':')
+
+    def test_find_pattern_flag(self):
+        result = strings.find('1:a 2:b', re.compile('[A-Z]', re.IGNORECASE))
+        self.assertEqual(result, 'a')
 
 class TestProperCase(unittest.TestCase):
     def test_proper_case(self):

@@ -2,6 +2,7 @@ __docformat__ = 'google'
 
 __all__ = [
     'replace_all',
+    'find',
     'squish',
     'normalize_whitespace',
     'check_case',
@@ -9,7 +10,7 @@ __all__ = [
     'match_case'
 ]
 
-from typing import List
+from typing import List, Pattern
 import re
 
 def replace_all(replacements: dict, text: str) -> str:
@@ -32,6 +33,26 @@ def replace_all(replacements: dict, text: str) -> str:
         for (old_pattern, new_pattern) in replacements.items():
             text = re.sub(old_pattern, new_pattern, text)
     return text
+
+def find(text: str, pattern: re.Pattern | str) -> str:
+    """Get first matching substring from a string.
+        
+    Returns:
+        First match for pattern in text
+
+    Examples:
+        >>> find('a 1 b 2', '\d+')
+        '1'
+        >>> find('a 1 b 2', re.compile('\d+'))
+        '1'
+    """
+    if not isinstance(text, str):
+        raise TypeError('Input text must be a string')
+    elif not isinstance(pattern, re.Pattern | str):
+        raise TypeError('Pattern must be a string or re.compile object')
+    else:
+        match = re.search(pattern, text)
+        return match.group(0) if match is not None else None
 
 def squish(text: str) -> str:
     """Normalize whitespace in a string.
