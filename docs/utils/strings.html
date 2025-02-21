@@ -77,17 +77,15 @@ manipulating case, creating identifiers, and performing text replacements.</p>
 
                         <label class="view-source-button" for="mod-strings-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">String manipulation utility functions for text processing.</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">This module provides functions for standardizing text formatting,</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">manipulating case, creating identifiers, and performing text replacements.</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.strings</span><span class="w"> </span><span class="kn">import</span> <span class="n">__all__</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.strings</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="n">__all__</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">1</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos">2</span></a><span class="sd">String manipulation utility functions for text processing.</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a>
+</span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a><span class="sd">This module provides functions for standardizing text formatting,</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos">5</span></a><span class="sd">manipulating case, creating identifiers, and performing text replacements.</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">6</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">7</span></a>
+</span><span id="L-8"><a href="#L-8"><span class="linenos">8</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.strings</span><span class="w"> </span><span class="kn">import</span> <span class="n">__all__</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos">9</span></a><span class="kn">from</span><span class="w"> </span><span class="nn">.strings</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 </span></pre></div>
 
 
@@ -541,18 +539,18 @@ whitespace with a single space.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">match_case</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">text</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">matchreference</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+        <span class="name">match_case</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">text</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">match_reference</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
 
                 <label class="view-source-button" for="match_case-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#match_case"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="match_case-171"><a href="#match_case-171"><span class="linenos">171</span></a><span class="k">def</span><span class="w"> </span><span class="nf">match_case</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">matchreference</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="match_case-171"><a href="#match_case-171"><span class="linenos">171</span></a><span class="k">def</span><span class="w"> </span><span class="nf">match_case</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">match_reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </span><span id="match_case-172"><a href="#match_case-172"><span class="linenos">172</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Align the case of string with the case of comparison string.</span>
 </span><span id="match_case-173"><a href="#match_case-173"><span class="linenos">173</span></a><span class="sd">    </span>
 </span><span id="match_case-174"><a href="#match_case-174"><span class="linenos">174</span></a><span class="sd">    Args:</span>
 </span><span id="match_case-175"><a href="#match_case-175"><span class="linenos">175</span></a><span class="sd">        text: String to normalize case</span>
-</span><span id="match_case-176"><a href="#match_case-176"><span class="linenos">176</span></a><span class="sd">        matchreference: String to reference for case</span>
+</span><span id="match_case-176"><a href="#match_case-176"><span class="linenos">176</span></a><span class="sd">        match_reference: String to reference for case</span>
 </span><span id="match_case-177"><a href="#match_case-177"><span class="linenos">177</span></a><span class="sd">        </span>
 </span><span id="match_case-178"><a href="#match_case-178"><span class="linenos">178</span></a><span class="sd">    Returns:</span>
 </span><span id="match_case-179"><a href="#match_case-179"><span class="linenos">179</span></a><span class="sd">        String with matched case applied</span>
@@ -564,13 +562,13 @@ whitespace with a single space.</p>
 </span><span id="match_case-185"><a href="#match_case-185"><span class="linenos">185</span></a><span class="sd">        &gt;&gt;&gt; match_case(&#39;AbCd&#39;, &#39;a&#39;)</span>
 </span><span id="match_case-186"><a href="#match_case-186"><span class="linenos">186</span></a><span class="sd">        &#39;abcd&#39;</span>
 </span><span id="match_case-187"><a href="#match_case-187"><span class="linenos">187</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="match_case-188"><a href="#match_case-188"><span class="linenos">188</span></a>    <span class="k">if</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">matchreference</span><span class="p">)}</span> <span class="o">!=</span> <span class="p">{</span><span class="nb">str</span><span class="p">}:</span>
+</span><span id="match_case-188"><a href="#match_case-188"><span class="linenos">188</span></a>    <span class="k">if</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">match_reference</span><span class="p">)}</span> <span class="o">!=</span> <span class="p">{</span><span class="nb">str</span><span class="p">}:</span>
 </span><span id="match_case-189"><a href="#match_case-189"><span class="linenos">189</span></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Both inputs must be strings&#39;</span><span class="p">)</span>
-</span><span id="match_case-190"><a href="#match_case-190"><span class="linenos">190</span></a>    <span class="k">elif</span> <span class="n">check_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="n">check_case</span><span class="p">(</span><span class="n">matchreference</span><span class="p">):</span>
+</span><span id="match_case-190"><a href="#match_case-190"><span class="linenos">190</span></a>    <span class="k">elif</span> <span class="n">check_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="n">check_case</span><span class="p">(</span><span class="n">match_reference</span><span class="p">):</span>
 </span><span id="match_case-191"><a href="#match_case-191"><span class="linenos">191</span></a>        <span class="k">return</span> <span class="n">text</span>
-</span><span id="match_case-192"><a href="#match_case-192"><span class="linenos">192</span></a>    <span class="k">elif</span> <span class="n">matchreference</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
+</span><span id="match_case-192"><a href="#match_case-192"><span class="linenos">192</span></a>    <span class="k">elif</span> <span class="n">match_reference</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
 </span><span id="match_case-193"><a href="#match_case-193"><span class="linenos">193</span></a>        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-</span><span id="match_case-194"><a href="#match_case-194"><span class="linenos">194</span></a>    <span class="k">elif</span> <span class="n">matchreference</span><span class="o">.</span><span class="n">islower</span><span class="p">():</span>
+</span><span id="match_case-194"><a href="#match_case-194"><span class="linenos">194</span></a>    <span class="k">elif</span> <span class="n">match_reference</span><span class="o">.</span><span class="n">islower</span><span class="p">():</span>
 </span><span id="match_case-195"><a href="#match_case-195"><span class="linenos">195</span></a>        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 </span><span id="match_case-196"><a href="#match_case-196"><span class="linenos">196</span></a>    <span class="k">else</span><span class="p">:</span>
 </span><span id="match_case-197"><a href="#match_case-197"><span class="linenos">197</span></a>        <span class="k">return</span> <span class="n">proper_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -583,7 +581,7 @@ whitespace with a single space.</p>
 
 <ul>
 <li><strong>text:</strong>  String to normalize case</li>
-<li><strong>matchreference:</strong>  String to reference for case</li>
+<li><strong>match_reference:</strong>  String to reference for case</li>
 </ul>
 
 <h6 id="returns">Returns:</h6>
