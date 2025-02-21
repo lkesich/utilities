@@ -55,15 +55,15 @@ class TestCheckCase(unittest.TestCase):
 
 class TestFind(unittest.TestCase):
     def test_find_string(self):
-        result = strings.find('a 1 b 2', '\d+')
+        result = strings.find('\\d+', 'a 1 b 2')
         self.assertEqual(result, '1')
 
     def test_find_pattern(self):
-        result = strings.find('a:1 b:2', re.compile('[^a-z]'))
+        result = strings.find(re.compile('[^a-z]'), 'a:1 b:2')
         self.assertEqual(result, ':')
 
     def test_find_pattern_flag(self):
-        result = strings.find('1:a 2:b', re.compile('[A-Z]', re.IGNORECASE))
+        result = strings.find(re.compile('[A-Z]', re.IGNORECASE), '1:a 2:b')
         self.assertEqual(result, 'a')
 
 class TestProperCase(unittest.TestCase):

@@ -159,22 +159,22 @@ manipulating case, and performing text replacements.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">find</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">text</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">pattern</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span> <span class="o">|</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+        <span class="name">find</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">pattern</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span> <span class="o">|</span> <span class="nb">str</span>, </span><span class="param"><span class="n">text</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
 
                 <label class="view-source-button" for="find-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#find"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="find-38"><a href="#find-38"><span class="linenos">38</span></a><span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="find-38"><a href="#find-38"><span class="linenos">38</span></a><span class="k">def</span><span class="w"> </span><span class="nf">find</span><span class="p">(</span><span class="n">pattern</span><span class="p">:</span> <span class="n">re</span><span class="o">.</span><span class="n">Pattern</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </span><span id="find-39"><a href="#find-39"><span class="linenos">39</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Get first matching substring from a string.</span>
 </span><span id="find-40"><a href="#find-40"><span class="linenos">40</span></a><span class="sd">        </span>
 </span><span id="find-41"><a href="#find-41"><span class="linenos">41</span></a><span class="sd">    Returns:</span>
 </span><span id="find-42"><a href="#find-42"><span class="linenos">42</span></a><span class="sd">        First match for pattern in text</span>
 </span><span id="find-43"><a href="#find-43"><span class="linenos">43</span></a>
 </span><span id="find-44"><a href="#find-44"><span class="linenos">44</span></a><span class="sd">    Examples:</span>
-</span><span id="find-45"><a href="#find-45"><span class="linenos">45</span></a><span class="sd">        &gt;&gt;&gt; find(&#39;a 1 b 2&#39;, &#39;\d+&#39;)</span>
+</span><span id="find-45"><a href="#find-45"><span class="linenos">45</span></a><span class="sd">        &gt;&gt;&gt; find(&#39;\\d+&#39;, &#39;a 1 b 2&#39;)</span>
 </span><span id="find-46"><a href="#find-46"><span class="linenos">46</span></a><span class="sd">        &#39;1&#39;</span>
-</span><span id="find-47"><a href="#find-47"><span class="linenos">47</span></a><span class="sd">        &gt;&gt;&gt; find(&#39;a 1 b 2&#39;, re.compile(&#39;\d+&#39;))</span>
+</span><span id="find-47"><a href="#find-47"><span class="linenos">47</span></a><span class="sd">        &gt;&gt;&gt; find(re.compile(&#39;\\d+&#39;), &#39;a 1 b 2&#39;)</span>
 </span><span id="find-48"><a href="#find-48"><span class="linenos">48</span></a><span class="sd">        &#39;1&#39;</span>
 </span><span id="find-49"><a href="#find-49"><span class="linenos">49</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="find-50"><a href="#find-50"><span class="linenos">50</span></a>    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -199,9 +199,9 @@ manipulating case, and performing text replacements.</p>
 
 <blockquote>
   <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a 1 b 2&#39;</span><span class="p">,</span> <span class="s1">&#39;\d+&#39;</span><span class="p">)</span>
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;a 1 b 2&#39;</span><span class="p">)</span>
 <span class="go">&#39;1&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;a 1 b 2&#39;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">find</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">),</span> <span class="s1">&#39;a 1 b 2&#39;</span><span class="p">)</span>
 <span class="go">&#39;1&#39;</span>
 </code></pre>
   </div>

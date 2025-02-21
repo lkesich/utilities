@@ -34,16 +34,16 @@ def replace_all(replacements: dict, text: str) -> str:
             text = re.sub(old_pattern, new_pattern, text)
     return text
 
-def find(text: str, pattern: re.Pattern | str) -> str:
+def find(pattern: re.Pattern | str, text: str) -> str:
     """Get first matching substring from a string.
         
     Returns:
         First match for pattern in text
 
     Examples:
-        >>> find('a 1 b 2', '\d+')
+        >>> find('\\d+', 'a 1 b 2')
         '1'
-        >>> find('a 1 b 2', re.compile('\d+'))
+        >>> find(re.compile('\\d+'), 'a 1 b 2')
         '1'
     """
     if not isinstance(text, str):
