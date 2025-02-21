@@ -4,7 +4,6 @@ __all__ = [
     'replace_all',
     'squish',
     'normalize_whitespace',
-    'create_surrogate_key',
     'check_case',
     'proper_case',
     'match_case'
@@ -75,42 +74,21 @@ def normalize_whitespace(text: str) -> str:
         'a, b c (1)'
     """
     # Characters that should not have leading whitespace
-    reMOVE_LEADING_SPACE = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
+    _remove_leading_space = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
     # Characters that should not have trailing whitespace
-    reMOVE_TRAILING_SPACE = ['(', '/', '-']
+    _remove_trailing_space = ['(', '/', '-']
     # Characters that should have leading whitespace
-    _ADD_LEADING_SPACE = ['&', '(']
+    _add_leading_space = ['&', '(']
     # Characters that should have trailing whitespace
-    _ADD_TRAILING_SPACE = ['&', ')', ',', '.', ':', ';', '!', '?']
+    _add_trailing_space = ['&', ')', ',', '.', ':', ';', '!', '?']
 
     replacements = {
-        f"\s([{''.join(reMOVE_LEADING_SPACE)}])": "\g<1>"
-        , f"([{''.join(reMOVE_TRAILING_SPACE)}])\s": "\g<1>"
-        , f"(?<=[^\s])([{''.join(_ADD_LEADING_SPACE)}])": " \g<1>"
-        , f"([{''.join(_ADD_TRAILING_SPACE)}])(?=[^\s])": "\g<1> "
+        f"\s([{''.join(_remove_leading_space)}])": r"\g<1>"
+        , f"([{''.join(_remove_trailing_space)}])\s": r"\g<1>"
+        , f"(?<=[^\s])([{''.join(_add_leading_space)}])": r" \g<1>"
+        , f"([{''.join(_add_trailing_space)}])(?=[^\s])": r"\g<1> "
     }
     return replace_all(replacements, squish(text))
-
-def create_surrogate_key(fields: List, delimiter='_') -> str:
-    """Create surrogate primary key from a list.
-
-    Args:
-        fields: List of elements to include
-        delimiter: String delimiter. Defaults to `_`
-    
-    Returns:
-        Surrogate primary key
-
-    Examples:
-        >>> create_surrogate_key([12, 'a.b', None, 'c d'])
-        '12_ab_cd'
-        >>> create_surrogate_key([12, 'a.b', None, 'c d'], '~')
-        '12~ab~cd'
-    """
-    elements = list(filter(None, fields))
-    elements = map(lambda e: re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
-    id_string = f'{delimiter}'.join(list(elements))
-    return id_string
 
 def check_case(text: str) -> str:
     """Check if a string is upper, lower, or mixed case.

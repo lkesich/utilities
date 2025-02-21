@@ -1,8 +1,8 @@
 """
-String manipulation utility functions for text processing.
+String manipulation functions for text processing.
 
-This module provides functions for standardizing text formatting,
-manipulating case, creating identifiers, and performing text replacements.
+This module provides functions for standardizing whitespace,
+manipulating case, and performing text replacements.
 """
 
 from .strings import __all__

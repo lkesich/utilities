@@ -36,15 +36,6 @@ class TestReplaceAll(unittest.TestCase):
         result = strings.replace_all({'&(\w+)':'\g<1>'}, 'aa&bb')
         self.assertEqual(result, 'aabb')
 
-class TestCreateSurrogateKey(unittest.TestCase):
-    def test_create_surrogate_key(self):
-        result = strings.create_surrogate_key([12, 'a.b', None, 'c d'])
-        self.assertEqual(result, '12_ab_cd')
-
-    def test_create_surrogate_key_custom_delimiter(self):
-        result = strings.create_surrogate_key([12, 'a.b', None, 'c d'], '~')
-        self.assertEqual(result, '12~ab~cd')
-
 class TestCheckCase(unittest.TestCase):
     def test_check_case_upper(self):
         result = strings.check_case('LEPAGE')
