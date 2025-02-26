@@ -24,8 +24,8 @@ def replace_all(replacements: dict, text: str) -> str:
         String with all replacements applied
         
     Examples:
-        >>> replace_all({'a': 'A'}, 'abc')
-        'Abc'
+        >>> replace_all({'a': 'd', 'b': 'e'}, 'abc')
+        'dec'
         >>> replace_all({r'\d+': '#'}, 'a1')
         'a#'
     """
