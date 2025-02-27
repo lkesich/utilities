@@ -166,12 +166,18 @@ def proper_case(text: str) -> str:
         title = re.sub(f'(?i)(?<=\s){word}\\b', word, title)
     return title
 
-def match_case(text: str, match_reference: str) -> str:
+def match_case(
+        text: str, 
+        match_reference: str, 
+        preserve_mixed_case: bool=True) -> str:
     """Align the case of string with the case of comparison string.
     
     Args:
         text: String to normalize case
         match_reference: String to reference for case
+        preserve_mixed_case: True if mixed case `text` with mixed case 
+            `match_reference` should be returned unaltered, False if 
+            `text` should be forced to proper case
         
     Returns:
         String with matched case applied
@@ -182,10 +188,14 @@ def match_case(text: str, match_reference: str) -> str:
     Examples:
         >>> match_case('AbCd', 'a')
         'abcd'
+        >>> match_case('LePage', 'aB')
+        'LePage'
+        >>> match_case('LePage', 'aB', preserve_mixed_case=False)
+        'Lepage'
     """
     if {type(text), type(match_reference)} != {str}:
         raise TypeError('Both inputs must be strings')
-    elif check_case(text) == check_case(match_reference):
+    elif preserve_mixed_case and check_case(text) == check_case(match_reference):
         return text
     elif match_reference.isupper():
         return text.upper()

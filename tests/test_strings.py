@@ -77,18 +77,6 @@ class TestMatchCase(unittest.TestCase):
 
     def test_match_case_type_error_match(self):
         self.assertRaises(TypeError, strings.match_case, 1, 'a')
-    
-    def test_match_case_mixed_to_lower(self):
-        result = strings.match_case('of Mice and Men', 'a')
-        self.assertEqual(result, 'of mice and men')
-
-    def test_match_case_mixed_to_upper(self):
-        result = strings.match_case('of Mice and Men', 'A')
-        self.assertEqual(result, 'OF MICE AND MEN')
-
-    def test_match_case_mixed_to_mixed(self):
-        result = strings.match_case('of Mice and Men', 'aB')
-        self.assertEqual(result, 'of Mice and Men')
 
     def test_match_case_upper_to_lower(self):
         result = strings.match_case('OF MICE AND MEN', 'a')
@@ -113,6 +101,26 @@ class TestMatchCase(unittest.TestCase):
     def test_match_case_lower_to_mixed(self):
         result = strings.match_case('of mice and men', 'aB')
         self.assertEqual(result, 'Of Mice and Men')
+
+    def test_match_case_mixed_to_lower(self):
+        result = strings.match_case('of Mice and Men', 'a')
+        self.assertEqual(result, 'of mice and men')
+
+    def test_match_case_mixed_to_upper(self):
+        result = strings.match_case('of Mice and Men', 'A')
+        self.assertEqual(result, 'OF MICE AND MEN')
+
+    def test_match_case_mixed_to_mixed(self):
+        result = strings.match_case('of Mice and Men', 'aB')
+        self.assertEqual(result, 'of Mice and Men')
+
+    def test_match_case_mixed_to_mixed_preserve_mixed(self):
+        result = strings.match_case('Paul LePage', 'aB')
+        self.assertEqual(result, 'Paul LePage')
+
+    def test_match_case_mixed_to_mixed_force_proper(self):
+        result = strings.match_case('Paul LePage', 'aB', preserve_mixed_case=False)
+        self.assertEqual(result, 'Paul Lepage')
 
 if __name__ == '__main__':
     unittest.main()

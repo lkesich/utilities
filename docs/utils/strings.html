@@ -112,8 +112,8 @@ manipulating case, and performing text replacements.</p>
 </span><span id="replace_all-25"><a href="#replace_all-25"><span class="linenos">25</span></a><span class="sd">        String with all replacements applied</span>
 </span><span id="replace_all-26"><a href="#replace_all-26"><span class="linenos">26</span></a><span class="sd">        </span>
 </span><span id="replace_all-27"><a href="#replace_all-27"><span class="linenos">27</span></a><span class="sd">    Examples:</span>
-</span><span id="replace_all-28"><a href="#replace_all-28"><span class="linenos">28</span></a><span class="sd">        &gt;&gt;&gt; replace_all({&#39;a&#39;: &#39;A&#39;}, &#39;abc&#39;)</span>
-</span><span id="replace_all-29"><a href="#replace_all-29"><span class="linenos">29</span></a><span class="sd">        &#39;Abc&#39;</span>
+</span><span id="replace_all-28"><a href="#replace_all-28"><span class="linenos">28</span></a><span class="sd">        &gt;&gt;&gt; replace_all({&#39;a&#39;: &#39;d&#39;, &#39;b&#39;: &#39;e&#39;}, &#39;abc&#39;)</span>
+</span><span id="replace_all-29"><a href="#replace_all-29"><span class="linenos">29</span></a><span class="sd">        &#39;dec&#39;</span>
 </span><span id="replace_all-30"><a href="#replace_all-30"><span class="linenos">30</span></a><span class="sd">        &gt;&gt;&gt; replace_all({r&#39;\d+&#39;: &#39;#&#39;}, &#39;a1&#39;)</span>
 </span><span id="replace_all-31"><a href="#replace_all-31"><span class="linenos">31</span></a><span class="sd">        &#39;a#&#39;</span>
 </span><span id="replace_all-32"><a href="#replace_all-32"><span class="linenos">32</span></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -143,8 +143,8 @@ manipulating case, and performing text replacements.</p>
 
 <blockquote>
   <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">replace_all</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;A&#39;</span><span class="p">},</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span>
-<span class="go">&#39;Abc&#39;</span>
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">replace_all</span><span class="p">({</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="s1">&#39;e&#39;</span><span class="p">},</span> <span class="s1">&#39;abc&#39;</span><span class="p">)</span>
+<span class="go">&#39;dec&#39;</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">replace_all</span><span class="p">({</span><span class="sa">r</span><span class="s1">&#39;\d+&#39;</span><span class="p">:</span> <span class="s1">&#39;#&#39;</span><span class="p">},</span> <span class="s1">&#39;a1&#39;</span><span class="p">)</span>
 <span class="go">&#39;a#&#39;</span>
 </code></pre>
@@ -531,39 +531,49 @@ whitespace with a single space.</p>
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">match_case</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">text</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">match_reference</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+        <span class="name">match_case</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">text</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">match_reference</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">preserve_mixed_case</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
 
                 <label class="view-source-button" for="match_case-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#match_case"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="match_case-170"><a href="#match_case-170"><span class="linenos">170</span></a><span class="k">def</span><span class="w"> </span><span class="nf">match_case</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">match_reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-</span><span id="match_case-171"><a href="#match_case-171"><span class="linenos">171</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Align the case of string with the case of comparison string.</span>
-</span><span id="match_case-172"><a href="#match_case-172"><span class="linenos">172</span></a><span class="sd">    </span>
-</span><span id="match_case-173"><a href="#match_case-173"><span class="linenos">173</span></a><span class="sd">    Args:</span>
-</span><span id="match_case-174"><a href="#match_case-174"><span class="linenos">174</span></a><span class="sd">        text: String to normalize case</span>
-</span><span id="match_case-175"><a href="#match_case-175"><span class="linenos">175</span></a><span class="sd">        match_reference: String to reference for case</span>
-</span><span id="match_case-176"><a href="#match_case-176"><span class="linenos">176</span></a><span class="sd">        </span>
-</span><span id="match_case-177"><a href="#match_case-177"><span class="linenos">177</span></a><span class="sd">    Returns:</span>
-</span><span id="match_case-178"><a href="#match_case-178"><span class="linenos">178</span></a><span class="sd">        String with matched case applied</span>
-</span><span id="match_case-179"><a href="#match_case-179"><span class="linenos">179</span></a><span class="sd">        </span>
-</span><span id="match_case-180"><a href="#match_case-180"><span class="linenos">180</span></a><span class="sd">    Raises:</span>
-</span><span id="match_case-181"><a href="#match_case-181"><span class="linenos">181</span></a><span class="sd">        TypeError: If input is not a string</span>
-</span><span id="match_case-182"><a href="#match_case-182"><span class="linenos">182</span></a>
-</span><span id="match_case-183"><a href="#match_case-183"><span class="linenos">183</span></a><span class="sd">    Examples:</span>
-</span><span id="match_case-184"><a href="#match_case-184"><span class="linenos">184</span></a><span class="sd">        &gt;&gt;&gt; match_case(&#39;AbCd&#39;, &#39;a&#39;)</span>
-</span><span id="match_case-185"><a href="#match_case-185"><span class="linenos">185</span></a><span class="sd">        &#39;abcd&#39;</span>
-</span><span id="match_case-186"><a href="#match_case-186"><span class="linenos">186</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="match_case-187"><a href="#match_case-187"><span class="linenos">187</span></a>    <span class="k">if</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">match_reference</span><span class="p">)}</span> <span class="o">!=</span> <span class="p">{</span><span class="nb">str</span><span class="p">}:</span>
-</span><span id="match_case-188"><a href="#match_case-188"><span class="linenos">188</span></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Both inputs must be strings&#39;</span><span class="p">)</span>
-</span><span id="match_case-189"><a href="#match_case-189"><span class="linenos">189</span></a>    <span class="k">elif</span> <span class="n">check_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="n">check_case</span><span class="p">(</span><span class="n">match_reference</span><span class="p">):</span>
-</span><span id="match_case-190"><a href="#match_case-190"><span class="linenos">190</span></a>        <span class="k">return</span> <span class="n">text</span>
-</span><span id="match_case-191"><a href="#match_case-191"><span class="linenos">191</span></a>    <span class="k">elif</span> <span class="n">match_reference</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
-</span><span id="match_case-192"><a href="#match_case-192"><span class="linenos">192</span></a>        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-</span><span id="match_case-193"><a href="#match_case-193"><span class="linenos">193</span></a>    <span class="k">elif</span> <span class="n">match_reference</span><span class="o">.</span><span class="n">islower</span><span class="p">():</span>
-</span><span id="match_case-194"><a href="#match_case-194"><span class="linenos">194</span></a>        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span id="match_case-195"><a href="#match_case-195"><span class="linenos">195</span></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="match_case-196"><a href="#match_case-196"><span class="linenos">196</span></a>        <span class="k">return</span> <span class="n">proper_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="match_case-170"><a href="#match_case-170"><span class="linenos">170</span></a><span class="k">def</span><span class="w"> </span><span class="nf">match_case</span><span class="p">(</span>
+</span><span id="match_case-171"><a href="#match_case-171"><span class="linenos">171</span></a>        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+</span><span id="match_case-172"><a href="#match_case-172"><span class="linenos">172</span></a>        <span class="n">match_reference</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+</span><span id="match_case-173"><a href="#match_case-173"><span class="linenos">173</span></a>        <span class="n">preserve_mixed_case</span><span class="p">:</span> <span class="nb">bool</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="match_case-174"><a href="#match_case-174"><span class="linenos">174</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Align the case of string with the case of comparison string.</span>
+</span><span id="match_case-175"><a href="#match_case-175"><span class="linenos">175</span></a><span class="sd">    </span>
+</span><span id="match_case-176"><a href="#match_case-176"><span class="linenos">176</span></a><span class="sd">    Args:</span>
+</span><span id="match_case-177"><a href="#match_case-177"><span class="linenos">177</span></a><span class="sd">        text: String to normalize case</span>
+</span><span id="match_case-178"><a href="#match_case-178"><span class="linenos">178</span></a><span class="sd">        match_reference: String to reference for case</span>
+</span><span id="match_case-179"><a href="#match_case-179"><span class="linenos">179</span></a><span class="sd">        preserve_mixed_case: True if mixed case `text` with mixed case </span>
+</span><span id="match_case-180"><a href="#match_case-180"><span class="linenos">180</span></a><span class="sd">            `match_reference` should be returned unaltered, False if </span>
+</span><span id="match_case-181"><a href="#match_case-181"><span class="linenos">181</span></a><span class="sd">            `text` should be forced to proper case</span>
+</span><span id="match_case-182"><a href="#match_case-182"><span class="linenos">182</span></a><span class="sd">        </span>
+</span><span id="match_case-183"><a href="#match_case-183"><span class="linenos">183</span></a><span class="sd">    Returns:</span>
+</span><span id="match_case-184"><a href="#match_case-184"><span class="linenos">184</span></a><span class="sd">        String with matched case applied</span>
+</span><span id="match_case-185"><a href="#match_case-185"><span class="linenos">185</span></a><span class="sd">        </span>
+</span><span id="match_case-186"><a href="#match_case-186"><span class="linenos">186</span></a><span class="sd">    Raises:</span>
+</span><span id="match_case-187"><a href="#match_case-187"><span class="linenos">187</span></a><span class="sd">        TypeError: If input is not a string</span>
+</span><span id="match_case-188"><a href="#match_case-188"><span class="linenos">188</span></a>
+</span><span id="match_case-189"><a href="#match_case-189"><span class="linenos">189</span></a><span class="sd">    Examples:</span>
+</span><span id="match_case-190"><a href="#match_case-190"><span class="linenos">190</span></a><span class="sd">        &gt;&gt;&gt; match_case(&#39;AbCd&#39;, &#39;a&#39;)</span>
+</span><span id="match_case-191"><a href="#match_case-191"><span class="linenos">191</span></a><span class="sd">        &#39;abcd&#39;</span>
+</span><span id="match_case-192"><a href="#match_case-192"><span class="linenos">192</span></a><span class="sd">        &gt;&gt;&gt; match_case(&#39;LePage&#39;, &#39;aB&#39;)</span>
+</span><span id="match_case-193"><a href="#match_case-193"><span class="linenos">193</span></a><span class="sd">        &#39;LePage&#39;</span>
+</span><span id="match_case-194"><a href="#match_case-194"><span class="linenos">194</span></a><span class="sd">        &gt;&gt;&gt; match_case(&#39;LePage&#39;, &#39;aB&#39;, preserve_mixed_case=False)</span>
+</span><span id="match_case-195"><a href="#match_case-195"><span class="linenos">195</span></a><span class="sd">        &#39;Lepage&#39;</span>
+</span><span id="match_case-196"><a href="#match_case-196"><span class="linenos">196</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="match_case-197"><a href="#match_case-197"><span class="linenos">197</span></a>    <span class="k">if</span> <span class="p">{</span><span class="nb">type</span><span class="p">(</span><span class="n">text</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">match_reference</span><span class="p">)}</span> <span class="o">!=</span> <span class="p">{</span><span class="nb">str</span><span class="p">}:</span>
+</span><span id="match_case-198"><a href="#match_case-198"><span class="linenos">198</span></a>        <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;Both inputs must be strings&#39;</span><span class="p">)</span>
+</span><span id="match_case-199"><a href="#match_case-199"><span class="linenos">199</span></a>    <span class="k">elif</span> <span class="n">preserve_mixed_case</span> <span class="ow">and</span> <span class="n">check_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">==</span> <span class="n">check_case</span><span class="p">(</span><span class="n">match_reference</span><span class="p">):</span>
+</span><span id="match_case-200"><a href="#match_case-200"><span class="linenos">200</span></a>        <span class="k">return</span> <span class="n">text</span>
+</span><span id="match_case-201"><a href="#match_case-201"><span class="linenos">201</span></a>    <span class="k">elif</span> <span class="n">match_reference</span><span class="o">.</span><span class="n">isupper</span><span class="p">():</span>
+</span><span id="match_case-202"><a href="#match_case-202"><span class="linenos">202</span></a>        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span><span id="match_case-203"><a href="#match_case-203"><span class="linenos">203</span></a>    <span class="k">elif</span> <span class="n">match_reference</span><span class="o">.</span><span class="n">islower</span><span class="p">():</span>
+</span><span id="match_case-204"><a href="#match_case-204"><span class="linenos">204</span></a>        <span class="k">return</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="match_case-205"><a href="#match_case-205"><span class="linenos">205</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="match_case-206"><a href="#match_case-206"><span class="linenos">206</span></a>        <span class="k">return</span> <span class="n">proper_case</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -574,6 +584,9 @@ whitespace with a single space.</p>
 <ul>
 <li><strong>text:</strong>  String to normalize case</li>
 <li><strong>match_reference:</strong>  String to reference for case</li>
+<li><strong>preserve_mixed_case:</strong>  True if mixed case <code>text</code> with mixed case 
+<code>match_reference</code> should be returned unaltered, False if 
+<code>text</code> should be forced to proper case</li>
 </ul>
 
 <h6 id="returns">Returns:</h6>
@@ -594,6 +607,10 @@ whitespace with a single space.</p>
   <div class="pdoc-code codehilite">
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">match_case</span><span class="p">(</span><span class="s1">&#39;AbCd&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
 <span class="go">&#39;abcd&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">match_case</span><span class="p">(</span><span class="s1">&#39;LePage&#39;</span><span class="p">,</span> <span class="s1">&#39;aB&#39;</span><span class="p">)</span>
+<span class="go">&#39;LePage&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">match_case</span><span class="p">(</span><span class="s1">&#39;LePage&#39;</span><span class="p">,</span> <span class="s1">&#39;aB&#39;</span><span class="p">,</span> <span class="n">preserve_mixed_case</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">&#39;Lepage&#39;</span>
 </code></pre>
   </div>
 </blockquote>
