@@ -10,7 +10,6 @@ __all__ = [
     'match_case'
 ]
 
-from typing import List, Pattern
 import re
 
 def replace_all(replacements: dict, text: str) -> str:
@@ -203,4 +202,3 @@ def match_case(
         return text.lower()
     else:
         return proper_case(text)
-
