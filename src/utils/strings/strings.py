@@ -92,6 +92,8 @@ def normalize_whitespace(text: str) -> str:
     Examples:
         >>> normalize_whitespace(" a ,b c( 1 ) ")
         'a, b c (1)'
+        >>> normalize_whitespace(" [a ],[ b] , [c] ")
+        '[a], [b], [c]'
     """
     # Characters that should not have leading whitespace
     _remove_leading_space = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
@@ -103,10 +105,10 @@ def normalize_whitespace(text: str) -> str:
     _add_trailing_space = ['&', ')', ',', '.', ':', ';', '!', '?']
 
     replacements = {
-        f"\s([{''.join(_remove_leading_space)}])": r"\g<1>"
-        , f"([{''.join(_remove_trailing_space)}])\s": r"\g<1>"
-        , f"(?<=[^\s])([{''.join(_add_leading_space)}])": r" \g<1>"
+        f"(?<=[^\s])([{''.join(_add_leading_space)}])": r" \g<1>"
         , f"([{''.join(_add_trailing_space)}])(?=[^\s])": r"\g<1> "
+        , f"\s([{''.join(_remove_leading_space)}])": r"\g<1>"
+        , f"([{''.join(_remove_trailing_space)}])\s": r"\g<1>"
     }
     return replace_all(replacements, squish(text))
 

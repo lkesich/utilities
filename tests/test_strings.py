@@ -25,8 +25,8 @@ class TestNormalizeWhitespace(unittest.TestCase):
         self.assertEqual(result, 'a & b')
 
     def test_multiple_conditions(self):
-        result = strings.normalize_whitespace(' a ,b c( 1 ) d&e -- f g /h .')
-        self.assertEqual(result, 'a, b c (1) d & e--f g/h.')
+        result = strings.normalize_whitespace(' a ,b c( 1 ) ,d&e -- f g /h .')
+        self.assertEqual(result, 'a, b c (1), d & e--f g/h.')
 
 class TestReplaceAll(unittest.TestCase):
     def test_replace_all_text(self):
