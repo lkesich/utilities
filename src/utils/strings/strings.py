@@ -96,19 +96,19 @@ def normalize_whitespace(text: str) -> str:
         '[a], [b], [c]'
     """
     # Characters that should not have leading whitespace
-    _remove_leading_space = ['.', ',', ':', ';', ')', '!', '?', '/', '-']
+    _REMOVE_LEADING_SPACE = ['.', ',', ':', ';', ')', ']', '!', '?', '/', '-']
     # Characters that should not have trailing whitespace
-    _remove_trailing_space = ['(', '/', '-']
+    _REMOVE_TRAILING_SPACE = ['(', '[', '/', '-']
     # Characters that should have leading whitespace
-    _add_leading_space = ['&', '(']
+    _ADD_LEADING_SPACE = ['&', '(']
     # Characters that should have trailing whitespace
-    _add_trailing_space = ['&', ')', ',', '.', ':', ';', '!', '?']
+    _ADD_TRAILING_SPACE = ['&', ')', ',', '.', ':', ';', '!', '?']
 
     replacements = {
-        f"(?<=[^\s])([{''.join(_add_leading_space)}])": r" \g<1>"
-        , f"([{''.join(_add_trailing_space)}])(?=[^\s])": r"\g<1> "
-        , f"\s([{''.join(_remove_leading_space)}])": r"\g<1>"
-        , f"([{''.join(_remove_trailing_space)}])\s": r"\g<1>"
+        f"(?<=[^\s])([{''.join(map(re.escape, _ADD_LEADING_SPACE))}])": r" \g<1>"
+        , f"([{''.join(map(re.escape, _ADD_TRAILING_SPACE))}])(?=[^\s])": r"\g<1> "
+        , f"\s([{''.join(map(re.escape,_REMOVE_LEADING_SPACE))}])": r"\g<1>"
+        , f"([{''.join(map(re.escape,_REMOVE_TRAILING_SPACE))}])\s": r"\g<1>"
     }
     return replace_all(replacements, squish(text))
 
