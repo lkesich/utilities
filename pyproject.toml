@@ -12,7 +12,7 @@ authors = [
 description = "Small utility functions"
 readme = "README.md"
 license = {file = "LICENSE"}
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 
 dependencies = [
   "google-cloud-bigquery",
