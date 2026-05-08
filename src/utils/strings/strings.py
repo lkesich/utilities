@@ -25,7 +25,7 @@ def replace_all(replacements: dict, text: str) -> str:
     Examples:
         >>> replace_all({'a': 'd', 'b': 'e'}, 'abc')
         'dec'
-        >>> replace_all({r'\d+': '#'}, 'a1')
+        >>> replace_all({r'\\d+': '#'}, 'a1')
         'a#'
     """
     if len(replacements) > 0:
@@ -40,9 +40,9 @@ def find(pattern: re.Pattern | str, text: str) -> str:
         First match for pattern in text
 
     Examples:
-        >>> find('\\d+', 'a 1 b 2')
+        >>> find(r'\\d+', 'a 1 b 2')
         '1'
-        >>> find(re.compile('\\d+'), 'a 1 b 2')
+        >>> find(re.compile(r'\\d+'), 'a 1 b 2')
         '1'
     """
     if not isinstance(text, str):
@@ -105,10 +105,10 @@ def normalize_whitespace(text: str) -> str:
     _ADD_TRAILING_SPACE = ['&', ')', ',', '.', ':', ';', '!', '?']
 
     replacements = {
-        f"(?<=[^\s])([{''.join(map(re.escape, _ADD_LEADING_SPACE))}])": r" \g<1>"
-        , f"([{''.join(map(re.escape, _ADD_TRAILING_SPACE))}])(?=[^\s])": r"\g<1> "
-        , f"\s([{''.join(map(re.escape,_REMOVE_LEADING_SPACE))}])": r"\g<1>"
-        , f"([{''.join(map(re.escape,_REMOVE_TRAILING_SPACE))}])\s": r"\g<1>"
+        rf"(?<=[^\s])([{''.join(map(re.escape, _ADD_LEADING_SPACE))}])": r" \g<1>"
+        , rf"([{''.join(map(re.escape, _ADD_TRAILING_SPACE))}])(?=[^\s])": r"\g<1> "
+        , rf"\s([{''.join(map(re.escape,_REMOVE_LEADING_SPACE))}])": r"\g<1>"
+        , rf"([{''.join(map(re.escape,_REMOVE_TRAILING_SPACE))}])\s": r"\g<1>"
     }
     return replace_all(replacements, squish(text))
 
@@ -164,7 +164,7 @@ def proper_case(text: str) -> str:
     title = text.title()
     
     for word in _ALWAYS_LOWERCASE:
-        title = re.sub(f'(?i)(?<=\s){word}\\b', word, title)
+        title = re.sub(rf'(?i)(?<=\s){word}\b', word, title)
     return title
 
 def match_case(

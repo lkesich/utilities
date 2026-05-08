@@ -129,7 +129,8 @@ def upsert_from_parquet(
     columns = pyarrow.parquet.read_schema(parquet_path).names
 
     def load_fn(table):
-        client.load_table_from_file(parquet_path, table, job_config = config)
+        with open(parquet_path, 'rb') as file:
+            client.load_table_from_file(file, table, job_config = config)
 
     _upsert(
         load_fn = load_fn,
