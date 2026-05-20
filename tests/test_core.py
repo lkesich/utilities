@@ -15,9 +15,13 @@ class TestCreateSurrogateKey(unittest.TestCase):
         result = core.create_surrogate_key([12, 'a.b', None, 'c d'], '~')
         self.assertEqual(result, '12~ab~cd')
 
+    def test_create_surrogate_spare_character(self):
+        result = core.create_surrogate_key(['a.b', '2022-01-01'], '_', ['-'])
+        self.assertEqual(result, 'ab_2022-01-01')
+
 class TestFlattenNestedList(unittest.TestCase):
     def test_one_level_list(self):
-        result = core.flatten_nested_list(['a','b',['c']])
+        result = core.flatten_nested_list(['a', 'b', ['c']])
         self.assertEqual(result, ['a', 'b', 'c'])
 
     def test_multi_level_list(self):

@@ -9,6 +9,7 @@ __all__ = [
 from typing import List, Callable, Any
 from functools import reduce
 from itertools import chain
+from datetime import date
 import re
 
 def chain_operations(arg, order_of_operations: List[Callable]):
@@ -31,12 +32,13 @@ def chain_operations(arg, order_of_operations: List[Callable]):
     """
     return reduce(lambda x, f: f(x), order_of_operations, arg)
 
-def create_surrogate_key(fields: List, delimiter='_') -> str:
+def create_surrogate_key(fields: list, delimiter = '_', spare: list = []) -> str:
     """Create surrogate primary key from a list of fields.
 
     Args:
         fields: List of elements to include
         delimiter: String delimiter. Defaults to `_`
+        spare: Any punctuation characters that should not be removed
     
     Returns:
         Surrogate primary key
@@ -46,9 +48,12 @@ def create_surrogate_key(fields: List, delimiter='_') -> str:
         '12_ab_cd'
         >>> create_surrogate_key([12, 'a.b', None, 'c d'], '~')
         '12~ab~cd'
+        >>> create_surrogate_key(['a.b', '2022-01-01'], '_', ['-'])
+        'ab_2022-01-01'
     """
-    elements = list(filter(None, fields))
-    elements = map(lambda e: re.sub('[^a-zA-Z0-9]', '', str(e)), elements)
+    spared = ''.join(map(re.escape, spare))
+    clean_elements = lambda e: re.sub(f'[^a-zA-Z0-9{spared}]', '', str(e))
+    elements = map(clean_elements, list(filter(None, fields)))
     id_string = f'{delimiter}'.join(list(elements))
     return id_string
 
@@ -63,7 +68,7 @@ def flatten_nested_list(items: List[Any|List[Any]]) -> List:
 
     Examples:
         >>> flatten_nested_list(['a', ['b'], 'c'])
-        ['a','b','c']
+        ['a', 'b', 'c']
         >>> flatten_nested_list([1, [2], [[3], [4]]])
         [1, 2, 3, 4]
     """
