@@ -12,12 +12,13 @@ __all__ = [
 
 import re
 
-def replace_all(replacements: dict, text: str) -> str:
+def replace_all(replacements: dict, text: str, flags = 0) -> str:
     """Perform multiple replacements in a text string.
     
     Args:
         replacements: Dictionary mapping patterns (string or regex) to replacements
         text: String to perform replacements on
+        flags: re flags
         
     Returns:
         String with all replacements applied
@@ -25,12 +26,14 @@ def replace_all(replacements: dict, text: str) -> str:
     Examples:
         >>> replace_all({'a': 'd', 'b': 'e'}, 'abc')
         'dec'
+        >>> replace_all({'a': 'd', 'b': 'e'}, 'ABC', re.I)
+        'deC'
         >>> replace_all({r'\\d+': '#'}, 'a1')
         'a#'
     """
     if len(replacements) > 0:
         for (old_pattern, new_pattern) in replacements.items():
-            text = re.sub(old_pattern, new_pattern, text)
+            text = re.sub(old_pattern, new_pattern, text, flags = flags)
     return text
 
 def find(pattern: re.Pattern | str, text: str) -> str:
