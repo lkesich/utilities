@@ -3,13 +3,14 @@ __docformat__ = 'google'
 __all__ = [
     'chain_operations',
     'create_surrogate_key',
-    'flatten_nested_list'
+    'flatten_nested_list',
+    'invert_list_of_dicts'
 ]
 
 from typing import List, Callable, Any
 from functools import reduce
 from itertools import chain
-from datetime import date
+from collections import defaultdict
 import re
 
 def chain_operations(arg, order_of_operations: List[Callable]):
@@ -79,3 +80,24 @@ def flatten_nested_list(items: List[Any|List[Any]]) -> List:
             for item in items
             )
         )
+
+def invert_list_of_dicts(dictionaries: list[dict]):
+    """Efficiently convert a list of dictionaries into a dictionary of lists.
+    
+    Args:
+        dictionaries: A list of dictionaries
+        
+    Returns:
+        A dictionary with one item for each unique key
+        
+    Examples:
+        >>> invert_list_of_dicts([{'a': 1, 'b': 2}, {'a': 3, 'b': 4}])
+        {'a': [1, 3], 'b': [2, 4]}
+        >>> invert_list_of_dicts([{'a': 1, 'b': 2}, {'a': 3, 'c': 4}])
+        {'a': [1, 3], 'b': [2], 'c': [4]}
+    """
+    result = defaultdict(list)
+    for dictionary in dictionaries:
+        for key, value in dictionary.items():
+            result[key].append(value)
+    return dict(result)
