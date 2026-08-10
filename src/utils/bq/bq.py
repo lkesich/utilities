@@ -2,7 +2,8 @@ __docformat__ = 'google'
 
 __all__ = [
     'upsert_from_parquet',
-    'upsert_from_dataframe'
+    'upsert_from_dataframe',
+    'load_from_parquet'
 ]
 
 from google.cloud import bigquery
@@ -93,7 +94,11 @@ def upsert_from_dataframe(
     columns = df.columns
 
     def load_fn(table):
-        client.load_table_from_dataframe(df, table, job_config = config)
+        job = client.load_table_from_dataframe(df, table, job_config = config)
+        try:
+            job.result(timeout=600)
+        except TimeoutError:
+            print('Job took took too long to complete')
     
     _upsert(
         load_fn = load_fn,
@@ -130,7 +135,12 @@ def upsert_from_parquet(
 
     def load_fn(table):
         with open(parquet_path, 'rb') as file:
-            client.load_table_from_file(file, table, job_config = config)
+            job = client.load_table_from_file(file, table, job_config = config)
+            try:
+                job.result(timeout=600)
+            except TimeoutError:
+                print('Job took took too long to complete')
+                
 
     _upsert(
         load_fn = load_fn,
@@ -140,3 +150,21 @@ def upsert_from_parquet(
         primary_keys = primary_keys,
         check_distinct = check_distinct
     )
+    
+def load_from_parquet(
+    parquet_path: str | Path,
+    client: bigquery.Client,
+    target_table: str
+):
+    config = bigquery.LoadJobConfig(
+        source_format = 'PARQUET',
+        write_disposition = 'WRITE_APPEND',
+        autodetect = True
+    )
+    
+    with open(parquet_path, 'rb') as file:
+        job = client.load_table_from_file(file, target_table, job_config = config)
+        try:
+            job.result(timeout=600)
+        except TimeoutError:
+            print('Job took took too long to complete')
