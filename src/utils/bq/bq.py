@@ -87,7 +87,7 @@ def upsert_from_dataframe(
         check_distinct: If True, the target table will be checked for duplicate `primary_keys`
     """
     config = bigquery.LoadJobConfig(
-        write_disposition = 'WRITE_TRUNCATE',
+        write_disposition = 'WRITE_APPEND',
         autodetect = True
     )
 
@@ -127,7 +127,7 @@ def upsert_from_parquet(
     """
     config = bigquery.LoadJobConfig(
         source_format = 'PARQUET',
-        write_disposition = 'WRITE_TRUNCATE',
+        write_disposition = 'WRITE_APPEND',
         autodetect = True
     )
 
@@ -158,7 +158,7 @@ def load_from_parquet(
 ):
     config = bigquery.LoadJobConfig(
         source_format = 'PARQUET',
-        write_disposition = 'WRITE_TRUNCATE',
+        write_disposition = 'WRITE_APPEND',
         autodetect = True
     )
     
